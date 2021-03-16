@@ -7,7 +7,6 @@
             v-on:remove-recipe="removeRecipe"
             v-on:patch-recipe="patchRecipe"
             v-on:open-edit-recipe="openEditRecipe"
-            v-on:get-recipe="getRecipe"
         />
     </section>
 </template>
@@ -43,11 +42,7 @@ export default observer({
         },
         openEditRecipe(id){
             this.$emit('open-edit-recipe', id);
-        },
-        getRecipe(id){
-            this.$emit('get-recipe', id);
-        }
-        
+        },        
     }
 })
 

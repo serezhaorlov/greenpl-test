@@ -29,7 +29,7 @@ export default {
     },
     methods: {
         editRecipe(){
-            this.$emit('editRecipe', this.inputsData, );
+            this.$emit('editRecipe', this.inputsData );
         },
         closeEditRecipe(){
             this.$emit('closeEditRecipe');

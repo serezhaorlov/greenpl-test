@@ -1,9 +1,9 @@
 <template>
   <div id="app" class="app">
 
-    <Header v-bind:recipes="this.$store.recipes" @open-popup="openCreateRecipe"/>
-    <section class="full-recipe" v-if="this.$store.recipe !== 0">
-        <img :src="this.$store.recipe.pic" alt="" class="full-recipe__pic">
+    <Header @open-popup="openCreateRecipe"/>
+    <section class="full-recipe">
+        <img :src="this.$store.recipe.pic" alt="recipe-pic" class="full-recipe__pic">
         <div class="container container_v">
             <h3 class="full-recipe__title">{{this.$store.recipe.name}}</h3>
             <p class="full-recipe__text">{{this.$store.recipe.text}}</p>
@@ -16,14 +16,13 @@
 
 <script>
 import Header from '../components/Header.vue';
-import { api } from '../utils/Api';
 import storeRecipes from '../store/RecipesStore';
 import Vue from "vue";
 
 Vue.prototype.$store = storeRecipes;
 
 export default {
-	name: 'RecipesPage',
+	name: 'FullRecipe',
 	components: {
 		Header,
 	},
@@ -32,8 +31,8 @@ export default {
 			isCreateRecipe: false,
         }
     },
-	mounted: function (){
-		
+	mounted(){
+		this.$store.getRecipe(this.recipeId)
 	},
     methods: {
 		openCreateRecipe(){
@@ -42,14 +41,9 @@ export default {
 		closeCreateRecipe(){
 			this.isCreateRecipe = false;
 		},
-		createRecipe(inputsData){
-			api.addRecipe(inputsData)
-				.then((r) => {
-					this.recipes.unshift(r);
-					inputsData = {};
-					this.closeCreateRecipe();
-				})
-			},
+	},
+	props: {
+		recipeId: Number,
 	}
   
 }

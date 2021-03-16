@@ -5,7 +5,9 @@ import { action, observable } from "mobx";
 export class RecipesStore {
     @observable recipes = [];
     @observable recipe = {};
-    @observable id = null;
+    @observable cardID = null;
+    @observable idFullRecipes = null;
+
 
     @action.bound
     loadRecipes() {
@@ -25,26 +27,46 @@ export class RecipesStore {
 
     @action.bound
     removeRecipe(id){
-			api.deleteReceip(id)
-				.then(() => {
-					this.recipes = this.recipes.filter(r => r.id !== id);
-				})
+		api.deleteReceip(id)
+			.then(() => {
+				this.recipes = this.recipes.filter(r => r.id !== id);
+			})
+            .catch((err) => {
+                console.log(err);
+            })
 	}
 
     @action.bound
 	editRecipe(data){
-		const dataID = this.id;
+		const dataID = this.cardID;
 		api.patchRecipe(data, dataID)
 			.then((res) => {
-				console.log(res);
-			})
+                const newList = this.recipes.map(o => {
+                if (o.id === res.id) {
+                    return res;
+                }
+                    return o;
+                });
+                this.recipes = newList;     
+            })
+            .catch((err) => {
+                console.log(err);
+            })
 	}
+
+    @action.bound
+    setId(id){
+        this.cardID = id;
+    }
     
     @action.bound
     getRecipe(id){
 		api.getRecipe(id)
 			.then((res) => {
-				this.recipe = res;
+				return this.recipe = res;
+            })
+            .catch((err) => {
+                console.log(err);
             })
 	}
 

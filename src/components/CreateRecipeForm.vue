@@ -1,21 +1,27 @@
 <template>
     <div class="popup" v-on:click="closeCreateRecipeOverlay">
         <form class="form" v-on:submit.prevent="createRecipe">
-            <button type="submit" class="form__close" @click="closeCreateRecipe"></button>
+            <button type="button" class="form__close" @click="closeCreateRecipe" required></button>
             <p class="form__subtitle">Enter recipe name</p>
-            <input type="text" name="name" class="form__input" v-model="inputsData.name">
+            <input type="text" name="name" class="form__input" v-model="inputsData.name" required>
             <p class="form__subtitle">Link to recipe picture</p>
-            <input type="text" name="pic" class="form__input" v-model="inputsData.pic">
+            <input type="text" name="pic" class="form__input" v-model="inputsData.pic" required>
             <p class="form__subtitle">Enter recipe</p>
-            <textarea name="" id="" class="form__area" v-model="inputsData.text" placeholder="text"></textarea>
+            <textarea name="" id="" class="form__area" v-model="inputsData.text" placeholder="text" required></textarea>
             <p class="form__subtitle">Enter recipe ingridients</p>
-            <textarea name="" id="" class="form__area" v-model="inputsData.ingridients" placeholder="ingridients"></textarea>
+            <textarea name="" id="" class="form__area" v-model="inputsData.ingridients" placeholder="ingridients" required></textarea>
             <button type="submit" class="form__submit" >Сохранить</button>
         </form>
     </div>
 </template>
 
 <script>
+
+import popups from '../store/Popups';
+import Vue from "vue";
+
+Vue.prototype.$popups = popups;
+
 export default {
     props: {
         recipes: Array,
@@ -32,9 +38,11 @@ export default {
     },
     methods: {
         createRecipe(){
+            console.log(this.$popups.inputsData.name)
             this.$emit('createRecipe', this.inputsData);
         },
         closeCreateRecipe(){
+            console.log('click')
             this.$emit('closeCreateRecipe');
         },
         closeCreateRecipeOverlay(evt){

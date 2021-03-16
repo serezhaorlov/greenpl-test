@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import RecipesPage from '../views/RecipesPage.vue';
-import FullRecipe from '../components/FullRecipe.vue';
+import FullRecipe from '../views/FullRecipe.vue';
 
 Vue.use(Router);
 
@@ -14,7 +14,7 @@ const router = new Router({
             component: RecipesPage,
         },
         {
-            path: '/recipe',
+            path: '/recipes/:recipeId',
             name: 'FullRecipe',
             component: FullRecipe,
             props: true

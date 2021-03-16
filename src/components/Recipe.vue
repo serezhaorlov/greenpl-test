@@ -10,8 +10,8 @@
             {{recipe.text}}
         </article>
     </div>
-    <router-link :to="{name: 'FullRecipe', params: {recipe: this.$store.getRecipe}}" class="recipe__link-more" >
-        <div v-on:click="$emit('get-recipe', recipe.id)">get more info</div>
+    <router-link :to="{ name: 'FullRecipe', params: {recipeId: recipe.id} }" class="recipe__link-more" >
+        <p>get more info</p>
     </router-link>
 
   </div>
@@ -30,7 +30,7 @@ export default {
             type: Object,
             required: true
         }
-        },
+    },
     methods: {
     }
 }
