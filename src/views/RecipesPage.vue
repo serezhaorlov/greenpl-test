@@ -2,7 +2,6 @@
   <div class="app">
     <Header @open-popup="openCreateRecipe"/> <!-- this.$store.recipes - массив из store пустой изначально, а должен быть полным -->
     <Recipes 
-		v-bind:recipes="this.$store.recipes"
 		@remove-recipe="removeRecipe"
 		@patch-recipe="editRecipe"
 		@open-edit-recipe="openEditRecipe"

@@ -2,7 +2,7 @@
   <div id="app" class="app">
 
     <Header v-bind:recipes="this.$store.recipes" @open-popup="openCreateRecipe"/>
-    <section class="full-recipe">
+    <section class="full-recipe" v-if="this.$store.recipe !== 0">
         <img :src="this.$store.recipe.pic" alt="" class="full-recipe__pic">
         <div class="container container_v">
             <h3 class="full-recipe__title">{{this.$store.recipe.name}}</h3>

@@ -1,6 +1,6 @@
 <script>
 import { api } from '../utils/Api';
-import { action, computed, observable } from "mobx";
+import { action, observable } from "mobx";
 
 export class RecipesStore {
     @observable recipes = [];
@@ -47,10 +47,6 @@ export class RecipesStore {
 				this.recipe = res;
             })
 	}
-
-    @computed get singleRecipe(){
-        return this.recipes;
-    }
 
 }
 
