@@ -1,0 +1,14 @@
+.form__close{
+    padding: 15px;
+    align-self: flex-end;
+    margin: 5px 10px;
+    background: transparent url(../../../assets/delete-button.svg) no-repeat center;
+    border: none;
+    outline: none;
+}
+
+
+.form__close:hover{
+    opacity: 0.6;
+    cursor: pointer;
+}

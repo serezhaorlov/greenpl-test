@@ -1,0 +1,10 @@
+.recipe__link-more{
+    color: crimson;
+    text-decoration: none;
+    align-self: center;
+    width: 100px;
+}
+
+.recipe__link-more:hover{
+    opacity: 0.6;
+}

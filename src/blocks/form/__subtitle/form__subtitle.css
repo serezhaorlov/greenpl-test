@@ -1,0 +1,7 @@
+.form__subtitle{
+    margin: 0;
+}
+
+.form__subtitle:nth-child(1){
+    margin: 15px 0 ;
+}

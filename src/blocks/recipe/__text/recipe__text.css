@@ -1,0 +1,6 @@
+.recipe__text{
+    margin: 20px 10px 10px;
+    max-width: 100%;
+    word-break: break-word;
+    overflow: hidden;
+}

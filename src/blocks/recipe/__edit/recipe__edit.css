@@ -1,0 +1,16 @@
+.recipe__edit{
+    position: absolute;
+    top: 20px;
+    left: 315px;
+    padding: 20px;
+    margin: 5px 10px;
+    background: transparent url(../../../assets/edit-button.svg) no-repeat center;
+    border: none;
+    outline: none;
+}
+
+
+.recipe__edit:hover{
+    opacity: 0.6;
+    cursor: pointer;
+}
