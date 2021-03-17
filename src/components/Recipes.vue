@@ -1,7 +1,7 @@
 <template>
-    <section class="recipes">
+    <section class="recipes"> <!--  -->
         <Recipe 
-            v-for="recipe of this.$store.filterByName"
+            v-for="recipe of this.$store.sortedRecipes" 
             v-bind:recipe="recipe"
             v-bind:key="recipe.id"
             v-on:remove-recipe="removeRecipe"
@@ -19,6 +19,11 @@ export default observer({
     name: 'Recipes',
     components: {
         Recipe,
+    },
+    data(){
+        return {
+            
+        }
     },
     methods: {
         removeRecipe(id){

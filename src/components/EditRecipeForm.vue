@@ -30,7 +30,7 @@ export default observer({
         }
     },
     mounted(){
-        this.$store.getRecipe(this.$store.cardID);
+        this.$store.getRecipe(this.$store.recipeID);
     },
     methods: {
         setName(e){
@@ -49,6 +49,7 @@ export default observer({
             this.$emit('editRecipe', this.inputsData );
         },
         closeEditRecipe(){
+
             this.$emit('closeEditRecipe');
         },
         closeEditRecipeOverlay(evt){

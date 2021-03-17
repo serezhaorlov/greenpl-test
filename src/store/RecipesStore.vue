@@ -5,15 +5,19 @@ import { action, computed, observable } from "mobx";
 export class RecipesStore {
     @observable recipes = [];
     @observable recipe = {};
-    @observable cardID = null;
+    @observable recipeID = null; /*  */
     @observable searchResult = '';
 
-    @computed get filterByName() {
-        return this.recipes.filter((r) => r.name.toLowerCase().includes(this.searchResult.toLowerCase())).sort((r, s) => {
+    @computed get sortedRecipes() {
+        return this.filteredRecipes.slice().sort((r, s) => {
             return s.id - r.id;
         })
     }
-    
+
+    @computed get filteredRecipes() {
+        return this.recipes.filter((r) => r.name.toLowerCase().includes(this.searchResult.toLowerCase()))
+    }
+
     @action
     loadRecipes() {
         api.getRecipes()
@@ -60,7 +64,7 @@ export class RecipesStore {
 
     @action
 	editRecipe(data){
-		const dataID = this.cardID;
+		const dataID = this.recipeID;/*  */
 		api.patchRecipe(data, dataID)
 			.then((res) => {
                 const newList = this.recipes.map(o => {
@@ -82,7 +86,7 @@ export class RecipesStore {
 
     @action
     setId(id){
-        this.cardID = id;
+        this.recipeID = id;/*  */
     }
     
     

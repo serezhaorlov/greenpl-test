@@ -23,11 +23,11 @@ export default observer({
     data: function() {
         return {
             inputsData: {
-                name: this.$store.recipe.name,
-                pic: "",
-                text: "",
-                ingridients: "",
-            },
+                    name: '',
+                    pic: '',
+                    text: '',
+                    ingridients: '',
+            }
         }
     },
     methods: {
@@ -35,6 +35,12 @@ export default observer({
             this.$emit('createRecipe', this.inputsData);
         },
         closeCreateRecipe(){
+            this.inputsData = {
+                name: '',
+                pic: '',
+                text: '',
+                ingridients: '',
+            };
             this.$emit('closeCreateRecipe');
         },
         closeCreateRecipeOverlay(evt){
