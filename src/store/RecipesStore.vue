@@ -42,6 +42,9 @@ export class RecipesStore {
 			.then((r) => {
 				this.recipes.push(r);
             })
+            .catch((err) => {
+                console.log(err);
+            })
     }
 
     @action
