@@ -3,15 +3,15 @@
     <button type="button" class="recipe__delete" v-on:click="$emit('remove-recipe', recipe.id)"></button>
     <button type="button" class="recipe__edit" v-on:click="$emit('open-edit-recipe', recipe.id)"></button>
 
-    <h3 class="recipe__name">{{ recipe.name }}</h3>
+    <h3 class="recipe__name" >{{ recipe.name }}</h3>
     <div class="container container_v">
         <img :src="recipe.pic" class="recipe__pic" alt="recipe_pic"/>
         <article class="recipe__text">
             {{recipe.text}}
         </article>
     </div>
-    <router-link :to="{ name: 'FullRecipe', params: {recipeId: recipe.id} }" class="recipe__link-more" >
-        <p>get more info</p>
+    <router-link :to="{ name: 'FullRecipe', params: { recipeId: recipe.id } }" class="recipe__link-more" > <!-- onClick - делал, в парамсах делал, в пропсах деалл -->
+        get more info
     </router-link>
 
   </div>
@@ -32,6 +32,12 @@ export default {
         }
     },
     methods: {
+        console(){
+            console.log(this.recipe.id)
+        },
+        getReciped(id){
+            (id)
+        }
     }
 }
 

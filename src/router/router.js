@@ -14,7 +14,7 @@ const router = new Router({
             component: RecipesPage,
         },
         {
-            path: '/recipes/:recipeId',
+            path: '/:recipeId',
             name: 'FullRecipe',
             component: FullRecipe,
             props: true

@@ -38,7 +38,6 @@ export default {
     },
     methods: {
         createRecipe(){
-            console.log(this.$popups.inputsData.name)
             this.$emit('createRecipe', this.inputsData);
         },
         closeCreateRecipe(){

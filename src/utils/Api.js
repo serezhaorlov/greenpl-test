@@ -22,6 +22,7 @@ class Api {
     }
 
     async getRecipe(id){
+        console.log(id)
         const res = await fetch(`${this.db}${id}`, {
             method: 'GET',
             headers: this.headers,

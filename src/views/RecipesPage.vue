@@ -27,7 +27,7 @@ Vue.prototype.$store = storeRecipes;
 
 export default observer({
 	mounted() {
-		this.loadRecipes(); /* здесь вызывается async функция для наполнения массива перед рендером */
+		this.loadRecipes();
 	},
 	name: 'RecipesPage',
 	components: {

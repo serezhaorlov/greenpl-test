@@ -18,35 +18,28 @@
 import Header from '../components/Header.vue';
 import storeRecipes from '../store/RecipesStore';
 import Vue from "vue";
+import { observer } from 'mobx-vue'; //this
 
 Vue.prototype.$store = storeRecipes;
 
-export default {
+export default observer({
 	name: 'FullRecipe',
 	components: {
 		Header,
 	},
-	data: function(){
-        return {
-			isCreateRecipe: false,
-        }
-    },
 	mounted(){
-		this.$store.getRecipe(this.recipeId)
+		this.$store.getRecipe(this.$route.params.recipeId);
 	},
     methods: {
 		openCreateRecipe(){
-			this.isCreateRecipe = true;
+			this.$popups.openCreateRecipe();
 		},
 		closeCreateRecipe(){
-			this.isCreateRecipe = false;
-		},
+			this.$popups.closeCreateRecipe()
+		}
 	},
-	props: {
-		recipeId: Number,
-	}
   
-}
+})
 </script>
 
 <style>
@@ -57,3 +50,4 @@ export default {
 	@import url("../blocks/full-recipe/__text/full-recipe__text.css");
 	
 </style>
+

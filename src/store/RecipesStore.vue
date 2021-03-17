@@ -6,8 +6,6 @@ export class RecipesStore {
     @observable recipes = [];
     @observable recipe = {};
     @observable cardID = null;
-    @observable idFullRecipes = null;
-
 
     @action.bound
     loadRecipes() {
@@ -15,7 +13,22 @@ export class RecipesStore {
             .then((d) => {
                 this.recipes = d.reverse();
             })
+            .catch((err) => {
+                console.log(err);
+            })
     }
+
+    @action.bound
+    getRecipe(id){
+		api.getRecipe(id)
+            .then((res) => {
+                this.recipe = res
+
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+	}
 
     @action.bound
     createRecipe(data) {
@@ -59,16 +72,7 @@ export class RecipesStore {
         this.cardID = id;
     }
     
-    @action.bound
-    getRecipe(id){
-		api.getRecipe(id)
-			.then((res) => {
-				return this.recipe = res;
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-	}
+    
 
 }
 
