@@ -4,8 +4,8 @@ import { action, observable } from "mobx";
 export class PopupStore {
     @observable isEditRecipe = false;
     @observable isCreateRecipe = false;
-/* 	@observable inputsData = {name: '', pic: '', text: '', ingridients: ''}
- */
+	@observable inputsData = {name: '', pic: '', text: '', ingridients: ''}
+
     @action.bound
 	openCreateRecipe(){
 		this.isCreateRecipe = true;

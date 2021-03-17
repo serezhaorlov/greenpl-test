@@ -19,10 +19,11 @@
 
 import popups from '../store/Popups';
 import Vue from "vue";
+import { observer } from 'mobx-vue';
 
 Vue.prototype.$popups = popups;
 
-export default {
+export default observer({
     props: {
         recipes: Array,
     },
@@ -41,7 +42,6 @@ export default {
             this.$emit('createRecipe', this.inputsData);
         },
         closeCreateRecipe(){
-            console.log('click')
             this.$emit('closeCreateRecipe');
         },
         closeCreateRecipeOverlay(evt){
@@ -50,7 +50,7 @@ export default {
             }
         }
     } 
-}
+})
 
 </script>
 

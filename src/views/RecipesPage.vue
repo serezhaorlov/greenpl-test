@@ -6,15 +6,17 @@
 		@patch-recipe="editRecipe"
 		@open-edit-recipe="openEditRecipe"
     />
+	<Footer />
 	<CreateRecipeForm v-if="this.$popups.isCreateRecipe" @closeCreateRecipe="closeCreateRecipe" @createRecipe="createRecipe"/>
 	<EditRecipeForm v-if="this.$popups.isEditRecipe" @editRecipe="editRecipe" @closeEditRecipe="closeEditRecipe"/>
   </div>
 </template>
 
 <script>
-/* осталось только разобрать с роутингом, и разобраться с inputData */
+/* осталось разобраться с inputData */
 import Header from '../components/Header.vue';
 import Recipes from '../components/Recipes.vue';
+import Footer from '../components/Footer.vue';
 import CreateRecipeForm from "../components/CreateRecipeForm.vue";
 import EditRecipeForm from "../components/EditRecipeForm.vue";
 import { observer } from 'mobx-vue';
@@ -33,8 +35,9 @@ export default observer({
 	components: {
 		Header,
 		Recipes,
+		Footer,
 		CreateRecipeForm,
-		EditRecipeForm
+		EditRecipeForm		
 	},
     methods: {
 		openCreateRecipe(){
