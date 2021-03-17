@@ -1,7 +1,7 @@
 <template>
     <section class="recipes">
         <Recipe 
-            v-for="recipe of this.$store.recipes"
+            v-for="recipe of this.$store.filterByName"
             v-bind:recipe="recipe"
             v-bind:key="recipe.id"
             v-on:remove-recipe="removeRecipe"
@@ -14,25 +14,12 @@
 <script>
 import Recipe from './Recipe.vue';
 import { observer } from 'mobx-vue';
-import storeRecipes from '../store/RecipesStore';
-import Vue from "vue";
-
-Vue.prototype.$store = storeRecipes;
 
 export default observer({
     name: 'Recipes',
     components: {
         Recipe,
     },
-    props: {
-        recipes:{
-            pic: String,
-            name: String,
-            text: String,
-            ingridients: String
-        }
-    },
-
     methods: {
         removeRecipe(id){
             this.$emit('remove-recipe', id);
@@ -48,6 +35,15 @@ export default observer({
 
 </script>
 
-<style>
-    @import url("../blocks/recipes/recipes.css");
+<style scoped>
+    .recipes{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, 432px);
+        grid-template-rows: repeat(auto-fit, 1fr);
+        gap: 10px;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        margin: 50px auto 0 0;
+    }
 </style>

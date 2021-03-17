@@ -17,20 +17,13 @@
 
 <script>
 
-import popups from '../store/Popups';
-import Vue from "vue";
 import { observer } from 'mobx-vue';
 
-Vue.prototype.$popups = popups;
-
 export default observer({
-    props: {
-        recipes: Array,
-    },
     data: function() {
         return {
             inputsData: {
-                name: "",
+                name: this.$store.recipe.name,
                 pic: "",
                 text: "",
                 ingridients: "",
@@ -54,12 +47,74 @@ export default observer({
 
 </script>
 
-<style>
-    @import url("../blocks/popup/popup.css");
-    @import url("../blocks/form/form.css");
-    @import url("../blocks/form/__close/form__close.css");
-    @import url("../blocks/form/__subtitle/form__subtitle.css");
-    @import url("../blocks/form/__input/form__input.css");
-    @import url("../blocks/form/__area/form__area.css");
-    @import url("../blocks/form/__submit/form__submit.css");
+<style scoped>
+   .popup {
+    position: fixed;
+    top: 0;
+    left:0;
+    bottom:0;
+    right:0;
+    z-index: 9;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 1;
+    display:flex;
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    align-items: center;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 400px;
+        height: 400px;
+        background-color: #fff;
+        border-radius: 15px;
+    }
+
+    .form__close {
+        padding: 15px;
+        align-self: flex-end;
+        margin: 5px 10px;
+        background: transparent url(../assets/delete-button.svg) no-repeat center;
+        border: none;
+        outline: none;
+    }
+
+    .form__close:hover {
+        opacity: 0.6;
+        cursor: pointer;
+    }
+    .form__subtitle {
+        margin: 0;
+    }
+
+    .form__subtitle:nth-child(1) {
+        margin: 15px 0 ;
+    }
+
+    .form__input {
+        margin: 15px 0 ;
+        width: 75%;
+    }
+
+    .form__area {
+        margin: 15px 0 ;
+        width: 90%;
+        height: 100%;
+    }
+
+    .form__submit {
+        padding: 10px 30px;
+        margin: 0 0 10px;
+    }
+
 </style>

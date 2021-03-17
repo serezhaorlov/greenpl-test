@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="app">
 
-    <Header @open-popup="openCreateRecipe"/>
+    <HeaderFullRecipe />
     <section class="full-recipe">
         <img :src="this.$store.recipe.pic" alt="recipe-pic" class="full-recipe__pic">
         <div class="container container_v">
@@ -15,17 +15,14 @@
 </template>
 
 <script>
-import Header from '../components/Header.vue';
-import storeRecipes from '../store/RecipesStore';
-import Vue from "vue";
-import { observer } from 'mobx-vue'; //this
+import HeaderFullRecipe from '../components/HeaderFullRecipe.vue';
+import { observer } from 'mobx-vue';
 
-Vue.prototype.$store = storeRecipes;
 
 export default observer({
 	name: 'FullRecipe',
 	components: {
-		Header,
+		HeaderFullRecipe,
 	},
 	mounted(){
 		this.$store.getRecipe(this.$route.params.recipeId);
@@ -42,12 +39,36 @@ export default observer({
 })
 </script>
 
-<style>
-	@import url("../blocks/full-recipe/full-recipe.css");
-	@import url("../blocks/full-recipe/__title/full-recipe__title.css");
-	@import url("../blocks/full-recipe/__pic/full-recipe__pic.css");
-	@import url("../blocks/full-recipe/__ing/full-recipe__ing.css");
-	@import url("../blocks/full-recipe/__text/full-recipe__text.css");
-	
+<style scoped>
+	.full-recipe{
+		display: flex;
+		flex-direction: column;
+		margin-top: 30px;
+	}
+	.full-recipe__pic{
+		max-width: 500px;
+		max-height: 400px;
+		object-fit: cover;
+	}
+
+	.container{
+		display: flex;
+	}
+
+	.container_v{
+		flex-direction: column;
+	}
+
+	.full-recipe__title{
+		font-size: 32px;
+	}
+
+	.full-recipe__text{
+		font-size: 18px;
+	}
+
+	.full-recipe__ing{
+		font-size: 18px;
+	}
 </style>
 

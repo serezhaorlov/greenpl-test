@@ -1,20 +1,13 @@
 <template>
     <header class="header">
         <router-link to="/" class="header__title">Recipes</router-link>
-        <ul class=header__links>
-            <li><a class="header__link" href="#" v-on:click="$emit('open-popup')">Create Recipe</a></li>
-            <li><a class="header__link" href="#">My recipes</a></li>
-        </ul>
+        <router-link to="/">
+            <button class="header__main-page-btn">Back to main</button>
+        </router-link>
+        
     </header>
 </template>
 
-<script>
-
-
-export default {
-    name: 'Header',
-}
-</script>
 
 <style scoped>
     .header{
@@ -39,23 +32,21 @@ export default {
         text-decoration: none;
         color: darkslategray;
     }
-
-    .header__links{
-        display: flex;
-        list-style: none;
-        justify-content: space-between;
-        width: 270px;
-        margin: 0;
-    }
-
-    .header__link{
-        text-decoration: none;
+    
+    .header__main-page-btn{
+        padding: 10px 30px;
+        font-size: 16px;
+        letter-spacing: 2px;
+        font-weight: bold;
         color: crimson;
-        opacity: 1;
-        transition: opacity 0.3s;
+        background-color: transparent;
+        border: 1px solid darkslategray;
+        outline: none;
     }
 
-    .header__link:hover{
-        opacity: 0.6;
+    .header__main-page-btn:hover{
+        opacity: 0.8;
+        cursor: pointer;
     }
+
 </style>

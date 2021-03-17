@@ -1,44 +1,50 @@
 <script>
 import { api } from '../utils/Api';
-import { action, observable } from "mobx";
+import { action, computed, observable } from "mobx";
 
 export class RecipesStore {
     @observable recipes = [];
     @observable recipe = {};
     @observable cardID = null;
+    @observable searchResult = '';
 
-    @action.bound
+    @computed get filterByName() {
+        return this.recipes.filter((r) => r.name.toLowerCase().includes(this.searchResult.toLowerCase())).sort((r, s) => {
+            return s.id - r.id;
+        })
+    }
+    
+    @action
     loadRecipes() {
         api.getRecipes()
             .then((d) => {
-                this.recipes = d.reverse();
+                this.recipes = d
             })
             .catch((err) => {
                 console.log(err);
             })
     }
 
-    @action.bound
+    @action
     getRecipe(id){
 		api.getRecipe(id)
             .then((res) => {
                 this.recipe = res
-
             })
             .catch((err) => {
                 console.log(err);
             })
 	}
 
-    @action.bound
+    @action
     createRecipe(data) {
         api.addRecipe(data)
 			.then((r) => {
-				this.recipes.unshift(r);
+				this.recipes.push(r);
             })
     }
 
-    @action.bound
+    @action
     removeRecipe(id){
 		api.deleteReceip(id)
 			.then(() => {
@@ -49,7 +55,7 @@ export class RecipesStore {
             })
 	}
 
-    @action.bound
+    @action
 	editRecipe(data){
 		const dataID = this.cardID;
 		api.patchRecipe(data, dataID)
@@ -67,7 +73,11 @@ export class RecipesStore {
             })
 	}
 
-    @action.bound
+    @computed get names(){
+       return this.$store.recipes.map(el => console.log(el.name))
+    }
+
+    @action
     setId(id){
         this.cardID = id;
     }

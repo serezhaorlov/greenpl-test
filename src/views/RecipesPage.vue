@@ -1,31 +1,26 @@
 <template>
   <div class="app">
     <Header @open-popup="openCreateRecipe"/>
+	<RecipesSearch />
     <Recipes 
 		@remove-recipe="removeRecipe"
 		@patch-recipe="editRecipe"
 		@open-edit-recipe="openEditRecipe"
     />
 	<Footer />
-	<CreateRecipeForm v-if="this.$popups.isCreateRecipe" @closeCreateRecipe="closeCreateRecipe" @createRecipe="createRecipe"/>
-	<EditRecipeForm v-if="this.$popups.isEditRecipe" @editRecipe="editRecipe" @closeEditRecipe="closeEditRecipe"/>
+	<CreateRecipeForm v-if="isCreateRecipe" @closeCreateRecipe="closeCreateRecipe" @createRecipe="createRecipe"/>
+	<EditRecipeForm v-if="isEditRecipe" @editRecipe="editRecipe" @closeEditRecipe="closeEditRecipe"/>
   </div>
 </template>
 
 <script>
-/* осталось разобраться с inputData */
 import Header from '../components/Header.vue';
+import RecipesSearch from '../components/RecipesSearch.vue';
 import Recipes from '../components/Recipes.vue';
 import Footer from '../components/Footer.vue';
 import CreateRecipeForm from "../components/CreateRecipeForm.vue";
 import EditRecipeForm from "../components/EditRecipeForm.vue";
 import { observer } from 'mobx-vue';
-import storeRecipes from '../store/RecipesStore';
-import popups from '../store/Popups';
-import Vue from "vue";
-
-Vue.prototype.$popups = popups;
-Vue.prototype.$store = storeRecipes;
 
 export default observer({
 	mounted() {
@@ -34,38 +29,45 @@ export default observer({
 	name: 'RecipesPage',
 	components: {
 		Header,
+		RecipesSearch,
 		Recipes,
 		Footer,
 		CreateRecipeForm,
 		EditRecipeForm		
 	},
+	data(){
+		return {
+			isCreateRecipe: false,
+			isEditRecipe: false,
+			data: null,
+		}
+	},
     methods: {
 		openCreateRecipe(){
-			this.$popups.openCreateRecipe();
+			this.isCreateRecipe = true;
 		},
 		closeCreateRecipe(){
-			this.$popups.closeCreateRecipe()
+			this.isCreateRecipe = false;
 		},
 		openEditRecipe(id){
 			this.$store.setId(id);
-			this.$popups.openEditRecipe()
+			this.isEditRecipe = true;
 		},
 		closeEditRecipe(){
-			this.$popups.closeEditRecipe()
+			this.isEditRecipe = false;
 		},
 		createRecipe(data){
 			this.$store.createRecipe(data)
-			console.log(this.$popups.isCreateRecipe);
-			this.$popups.closeCreateRecipe()
+			this.closeCreateRecipe()
 		},
 		removeRecipe(id){
 			this.$store.removeRecipe(id)
 		},
 		editRecipe(data){
 			this.$store.editRecipe(data, this.$store.cardID)
-			this.$popups.closeEditRecipe()
+			this.closeEditRecipe()
 		},
-		loadRecipes: function(){
+		loadRecipes(){
 			this.$store.loadRecipes();
 		}
 	}
@@ -73,17 +75,26 @@ export default observer({
 })
 </script>
 
-<style>
-  @import url("../blocks/page/page.css");
-
-  .app {
-    margin-top: 60px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    min-width: 475px;
-    max-width: 1440px;
-  }
+<style scoped>
+	.page{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0;
+			font-family: Avenir, Helvetica, Arial, sans-serif;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		text-align: center;
+		color: #2c3e50;
+	}
+	.app {
+		margin-top: 60px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		min-width: 475px;
+		max-width: 1440px;
+	}
 </style>
